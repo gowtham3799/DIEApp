@@ -2,7 +2,7 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox"
 ],
-    function (Controller,MessageBox) {
+    function (Controller, MessageBox) {
         "use strict";
 
         return Controller.extend("docect.controller.View1", {
@@ -33,24 +33,39 @@ sap.ui.define([
                 // var obj = {
                 //     clientId: "default"
                 // };
-                var omodel =this.getView().getModel();
-               var  headers= {
-                    'content-type': "application/json",
-                };
-                omodel.setHeaders(headers);
-                omodel.create("/jobs", formData, {
+                var omodel = this.getView().getModel();
+                // var headers = {
+                //     'content-type': "multipart/form-data",
+                //     'Accept': 'multipart/mixed'
+                // };
+                // omodel.setHeaders(headers);
+                // omodel.create("/jobs", formData, {
 
-                    success: function (oData, oResponse) {
-                        if (oData.id) {
-                            MessageBox.success("File uploaded successfully.");
-                            this.getView().getModel("DocExt").setProperty("/Fileid", oData.id);
-                            this.getView().byId("fileUploader").setValue("")
-                        }
-                        debugger
-                    }.bind(this),
-                    error: function (oError) {
-                        debugger
-                        // MessageBox.error(oError.message);
+                //     success: function (oData, oResponse) {
+                //         if (oData.id) {
+                //             MessageBox.success("File uploaded successfully.");
+                //             this.getView().getModel("DocExt").setProperty("/Fileid", oData.id);
+                //             this.getView().byId("fileUploader").setValue("")
+                //         }
+                //         debugger
+                //     }.bind(this),
+                //     error: function (oError) {
+                //         debugger
+                //         // MessageBox.error(oError.message);
+                //     }
+                // });
+
+                $.ajax({
+                    url: "/odata/v2/CatalogService/jobs",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response){
+                    debugger // Handle success response
+                    },
+                    error: function(xhr, textStatus, error){
+                        debugger  // Handle error response
                     }
                 });
             },
@@ -62,10 +77,7 @@ sap.ui.define([
                 const blob = new Blob([oUploadedFile], { type: oUploadedFile.type })
                 const formData = new FormData()
                 formData.append("file", blob, oUploadedFile.name)
-var obj={
-    "file":blob,
-
-};
+             
                 var options = {
                     "clientId": "default",
                     "extraction": {
