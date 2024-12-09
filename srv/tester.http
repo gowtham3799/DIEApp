@@ -1,0 +1,15 @@
+
+###Get Schemas
+GET http://localhost:4004/odata/v4/CatalogService/schemas
+
+
+###Get Jobs
+GET http://localhost:4004/odata/v4/CatalogService/jobs
+
+###Post Api data
+POST http://localhost:4004/odata/v4/CatalogService/jobs
+Content-Type: application/json
+
+{
+   "clientId": "default"
+}

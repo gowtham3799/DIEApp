@@ -1,0 +1,45 @@
+<mvc:View
+    controllerName="docect.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+        <Toolbar height="5rem">
+          <ToolbarSpacer />
+            <u:FileUploader
+                buttonText="Upload"
+                buttonOnly="false"
+                name="myFileUpload"
+                value=""
+                style="Emphasized"
+                change="onFileUploaderChange"
+                enabled="true"
+                id="fileUploader"
+                class="cl_Emphasizebtn"
+            />
+              <ToolbarSpacer />
+            </Toolbar>
+        </content>
+
+        <footer class="cl_footer">
+            <OverflowToolbar
+                enabled="true"
+                visible="true"
+            >
+                <ToolbarSpacer />
+                <content>
+                    <Button
+                        text="Read"
+                        press="ontest"
+                    />
+                </content>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
